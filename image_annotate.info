@@ -1,0 +1,13 @@
+; $Id $
+name = Image Annotate
+description = Allows users to add notes and references to users on pictures.
+dependencies[] = imagefield
+dependencies[] = jquery_ui
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-02-17
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "image_annotate"
+datestamp = "1266408492"
+
