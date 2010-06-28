@@ -11,17 +11,34 @@ function image_annotate_schema() {
         'type' => 'serial',
         'not null' => TRUE,
       ),
-      'cid' => array(
+      'nid' => array(
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'note' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
       ),
       'field_name' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
+      ),
+      'delta' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'size_width' => array(
         'type' => 'int',
@@ -70,5 +87,4 @@ function image_annotate_uninstall() {
   db_query("DELETE FROM {variable} WHERE name LIKE 'image_annotate_%'");
   db_query("DROP TABLE {image_annotate}");
   cache_clear_all('variables', 'cache');
-  // TODO : DUMP {place} ?
 }

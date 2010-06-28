@@ -1,0 +1,31 @@
+.image-annotate-canvas.circle .image-annotate-marker,
+.image-annotate-canvas.circle .image-annotate-annotater  {
+  background-image: url(circles-bg.png);
+  background-position: -150px 0px;
+  border: none;
+  height: 25px;
+  width: 25px;
+  margin: 0;
+  padding: 0;
+  z-index: 999 !important;
+  position: relative;
+}
+.image-annotate-canvas.circle .image-annotate-note.dim div.image-annotate-marker { border: none; }
+.image-annotate-canvas.circle .image-annotate-note div.text {
+  /* background-image: url(circles-bg.png);
+  background-position: -162px -13px; */
+  background-repeat: no-repeat;
+  margin-top: -13px;
+  margin-left: 12px;
+  background-color: #333;
+  border: none;
+  color: #FFF;
+  display: none;
+  position: relative;
+  width: 200px;
+  z-index: 998 !important;
+  padding: 12px;
+}
+.image-annotate-canvas.circle .image-annotate-note.active div.text {
+  display: block; 
+}
