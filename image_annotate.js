@@ -170,10 +170,12 @@ var ImageAnnotate = {
       .appendTo(this.$canvas);
     
     // Set the marker size
-    var $marker = $note.find('.image-annotate-marker').css({
-      height: opts.size_height + 'px',
-      width: opts.size_width + 'px'
-    });
+    if (self.options.resizable) {
+      var $marker = $note.find('.image-annotate-marker').css({
+        height: opts.size_height + 'px',
+        width: opts.size_width + 'px'
+      });
+    }
     
     // Set the note text
     var $text = $note.find('.text').html(opts.note).hide();

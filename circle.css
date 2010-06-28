@@ -11,6 +11,7 @@
   position: relative;
 }
 .image-annotate-canvas.circle .image-annotate-note.dim div.image-annotate-marker { border: none; }
+.image-annotate-canvas.circle .image-annotate-note.dim { z-index: 997 !important; }
 .image-annotate-canvas.circle .image-annotate-note div.text {
   /* background-image: url(circles-bg.png);
   background-position: -162px -13px; */
