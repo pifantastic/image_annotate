@@ -82,7 +82,8 @@ var ImageAnnotate = {
     // Make the annotater draggable/resizable
     self.$annotater
       .draggable({
-        containment: self.$canvas,
+        //containment: [self.$canvas.position().left, self.$canvas.position().top, self.$canvas.position().left + self.$canvas.width(), self.$canvas.position().top + self.$canvas.height()],
+        containment: 'parent',
         drag: attachFormToAnnotater,
         stop: attachFormToAnnotater
       });
@@ -95,15 +96,17 @@ var ImageAnnotate = {
     }
     
     // Add 'Add a note' link
-    self.$add = $('<a href="#" class="image-annotate-add">Add Note</a>');
-    self.$canvas.before(self.$add);
-    self.$add.click(function() {
-      self.showForm();
-      self.hideNotes();
-      attachFormToAnnotater();
-      return false;
-    });
-    
+    if (self.options.editable) {
+      self.$add = $('<a href="#" class="image-annotate-add">Add Note</a>');
+      self.$canvas.before(self.$add);
+      self.$add.click(function() {
+        self.showForm();
+        self.hideNotes();
+        attachFormToAnnotater();
+        return false;
+      });
+    }
+        
     // Add submit handler to form
     self.$form.find(".image-annotate-save").click(function() {
       self.saveNote();
@@ -146,11 +149,12 @@ var ImageAnnotate = {
     }
     
     $.post(url, data, function(response) {
-      // Add the annotation to the image
+      data.note = response.note;
+      data.editable = true;
       self.addNote(data);
       self.hideForm();
       self.showNotes();
-    });
+    }, "json");
     
     return false;
   },
@@ -178,7 +182,7 @@ var ImageAnnotate = {
     }
     
     // Set the note text
-    var $text = $note.find('.text').html(opts.note).hide();
+    var $text = $note.find('.text').html(opts.note || "").hide();
     
     // Add the edit options if the user can edit this note
     if (opts.editable) {

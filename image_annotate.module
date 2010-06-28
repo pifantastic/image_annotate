@@ -14,15 +14,13 @@ function image_annotate_menu() {
     'access callback' => 'image_annotate_user_access',
     'type' => MENU_CALLBACK,
   );
-  
   $items['image-annotate/edit/%node'] = array(
-    'title' => 'Save note',
+    'title' => 'Edit note',
     'page callback' => 'image_annotate_edit',
     'page arguments' => array(2),
     'access callback' => 'image_annotate_user_access',
     'type' => MENU_CALLBACK,
   );
-  
   $items['image-annotate/delete/%'] = array(
     'title' => 'Delete note',
     'page callback' => 'image_annotate_delete',
@@ -108,11 +106,13 @@ function image_annotate_create($node) {
         (%d, %d, \'%s\', \'%s\', %d, %d, %d, %d, %d)',
       $node->nid, $user->uid, $_POST['note'], $_POST['field_name'], $_POST['delta'], (int) $_POST['size_width'], (int) $_POST['size_height'], (int) $_POST['position_top'], (int) $_POST['position_left']
     );
+    
     $response['success'] = true;
     $response['id'] = db_last_insert_id('imgtag', 'id');
+    $response['note'] = '"'. check_plain($_POST['note']) . '"<span class="author"> '. t('by') .' '. theme('username', $user) .'</span>';
   }
   
-  drupal_json($response);
+  echo drupal_json($response);
   exit();
 }
 
@@ -184,14 +184,14 @@ function image_annotate_user_access() {
 }
 
 /**
- * Theme function for the image annotate formatter
+ * Theme function for the box style image annotate formatter
  */
 function theme_image_annotate_formatter_image_annotate_box($element) {
   return theme_image_annotate_formatter_image_annotate($element, 'box', TRUE);
 }
 
 /**
- * Theme function for the image annotate formatter
+ * Theme function for the circle style image annotate formatter
  */
 function theme_image_annotate_formatter_image_annotate_circle($element) {
   return theme_image_annotate_formatter_image_annotate($element, 'circle', FALSE);
@@ -234,8 +234,7 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
     $notes = array();
     while ($note = db_fetch_object($result)) {
       $editable = image_annotate_user_access() && $note->uid && $note->uid == $user->uid;
-      $author = theme('username', $note);
-      $text = '"'. check_plain($note->note) . '"<span class="author"> '. t('by') .' '. $author . '</span>';
+      $text = '"'. check_plain($note->note) . '"<span class="author"> '. t('by') .' '. theme('username', $note) . '</span>';
       $notes[] = array(
         'aid' => $note->aid,
         'nid' => $note->nid,
@@ -249,7 +248,9 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
       );
     }
     
+    // CSS id and class for this image
     $id = 'image-annotate-'. $field['field_name'] .'-'. $delta;
+    $class = 'imagefield imagefield-'. $field['field_name'] .' image-annotate image-annotate-'. $field['field_name'];
     
     // Build the field settings
     $settings = array(array(
@@ -268,9 +269,10 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
     jquery_ui_add(array('ui.resizable', 'ui.draggable'));
     drupal_add_js(drupal_get_path('module', 'image_annotate') .'/image_annotate.js');
     drupal_add_css(drupal_get_path('module', 'image_annotate') .'/image_annotate.css');
+    
+    // Load the formatter specific style sheet
     drupal_add_css(drupal_get_path('module', 'image_annotate') ."/$style.css");
     
-    $class = 'imagefield imagefield-'. $field['field_name'] .' image-annotate image-annotate-'. $field['field_name'];
     return theme('imagefield_image', $item, $item['alt'], $item['title'], array('class' => $class, 'id' => $id));
   }
   else {
