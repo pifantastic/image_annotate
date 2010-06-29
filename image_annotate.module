@@ -225,9 +225,11 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
       FROM {image_annotate} i 
       JOIN {users} u
       ON i.uid = u.uid 
-      WHERE i.field_name = \'%s\' AND i.delta = %d AND i.nid = %d
+      WHERE i.field_name = \'%s\' 
+      AND i.delta = %d 
+      AND i.nid = %d
       ORDER BY (i.size_height * i.size_width) DESC',
-      $field['field_name'], $delta, $element['#node']->vid
+      $field['field_name'], $delta, $element['#node']->nid
     );
     
     // Build the array of notes settings
@@ -249,7 +251,7 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
     }
     
     // CSS id and class for this image
-    $id = 'image-annotate-'. $field['field_name'] .'-'. $delta;
+    $id = 'image-annotate-'. $element['#node']->nid .'-'. $field['field_name'] .'-'. $delta;
     $class = 'imagefield imagefield-'. $field['field_name'] .' image-annotate image-annotate-'. $field['field_name'];
     
     // Build the field settings

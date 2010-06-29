@@ -82,7 +82,6 @@ var ImageAnnotate = {
     // Make the annotater draggable/resizable
     self.$annotater
       .draggable({
-        //containment: [self.$canvas.position().left, self.$canvas.position().top, self.$canvas.position().left + self.$canvas.width(), self.$canvas.position().top + self.$canvas.height()],
         containment: 'parent',
         drag: attachFormToAnnotater,
         stop: attachFormToAnnotater
