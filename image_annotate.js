@@ -23,6 +23,10 @@ $.fn.image_annotate = function(options) {
   }
 };
 
+/**
+ * Setup Drupal behavior to find annotatable images and 
+ * apply plugin
+ */
 Drupal.behaviors.image_annotate = function() {
   for (var i = 0; i < Drupal.settings.image_annotate.length; i++) {
     var settings = Drupal.settings.image_annotate[i];
@@ -195,11 +199,9 @@ var ImageAnnotate = {
     
     // Set the note hover states
     $note.hover(function() {
-      $note.addClass('active');
-      $note.siblings('.image-annotate-note').addClass('dim');
+      $note.addClass('active').siblings('.image-annotate-note').addClass('dim');
     }, function() {
-      $note.removeClass('active');
-      $note.siblings('.image-annotate-note').removeClass('dim');
+      $note.removeClass('active').siblings('.image-annotate-note').removeClass('dim');
     });
   },
   
@@ -207,7 +209,6 @@ var ImageAnnotate = {
    * Delete an annotation
    */
   deleteNote: function(aid, $note) {
-    var self = this;
     var url = Drupal.settings.basePath + 'image-annotate/delete/' + aid;
     
     $.post(url, { aid: aid }, function(response) {
