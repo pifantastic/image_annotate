@@ -1,9 +1,11 @@
+/* Canvas */
 .image-annotate-canvas {
   background-position: left top;
   background-repeat: no-repeat;
   display: block;
   position: relative;
 }
+  /* Annotater */
   .image-annotate-annotater {
     border: 1px solid black;
     display: block;
@@ -16,6 +18,9 @@
     width: 60px;
     height: 60px;
   }
+  .image-annotate-annotater-hide { display: none; }
+  
+  /* Form */
   .image-annotate-form {
     display: block;
     position: absolute;
@@ -24,13 +29,17 @@
     width: 200px;
     z-index: 999;
   }
-    .image-annotate-form textarea { display: block; }
+  .image-annotate-form-hide { display: none; }
+  .image-annotate-form textarea { display: block; }
+  
+  /* Note */
   .image-annotate-note {
     position: absolute;
     overflow: visible;
   }
-    .image-annotate-marker { border: 1px solid #FFFFFF; }
-    .image-annotate-note.dim div.image-annotate-marker { border: 1px solid #222222; }
+  .image-annotate-note-hide { display: none; }
+  .image-annotate-marker { border: 1px solid #FFFFFF; }
+  .image-annotate-note.dim div.image-annotate-marker { border: 1px solid #222222; }
   .image-annotate-note div.text {
     margin-top: 10px;
     max-width: 200px;
@@ -40,9 +49,9 @@
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border: none;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
     color: #000;
     display: none;
     position: relative;

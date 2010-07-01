@@ -157,9 +157,21 @@ function image_annotate_field_formatter_info() {
       'field types' => array('image', 'filefield'),
       'description' => t('Display a picture and its circle style annotations.'),
     ),
+    'image_annotate_pushpin' => array(
+      'label' => t('Image with pushpin style annotations'),
+      'field types' => array('image', 'filefield'),
+      'description' => t('Display a picture and its pushpin style annotations.'),
+    ),
   );
 
   return $formatters;
+}
+
+/**
+ * Return permissions for editing/creating annotations for the current user.
+ */
+function image_annotate_user_access() {
+  return user_access('administer image annotations') || user_access('create image annotations');
 }
 
 /**
@@ -173,14 +185,13 @@ function image_annotate_theme() {
     'image_annotate_formatter_image_annotate_circle' => array(
       'arguments' => array('element' => null),
     ),
+    'image_annotate_formatter_image_annotate_pushpin' => array(
+      'arguments' => array('element' => null),
+    ),
+    'image_annotate_formatter_image_annotate_add' => array(
+      'arguments' => array('class' => 'test'),
+    ),
   );
-}
-
-/**
- * Return permissions for editing/creating annotations for the current user.
- */
-function image_annotate_user_access() {
-  return user_access('administer image annotations') || user_access('create image annotations');
 }
 
 /**
@@ -195,6 +206,20 @@ function theme_image_annotate_formatter_image_annotate_box($element) {
  */
 function theme_image_annotate_formatter_image_annotate_circle($element) {
   return theme_image_annotate_formatter_image_annotate($element, 'circle', FALSE);
+}
+
+/**
+ * Theme function for the circle style image annotate formatter
+ */
+function theme_image_annotate_formatter_image_annotate_pushpin($element) {
+  return theme_image_annotate_formatter_image_annotate($element, 'pushpin', FALSE);
+}
+
+/**
+ * Theme function for the 'Add note' link
+ */
+function theme_image_annotate_formatter_image_annotate_add() {
+  return l(t('Add note'), '#');
 }
 
 /**
@@ -263,7 +288,8 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
       'notes' => $notes,
       'editable' => image_annotate_user_access(),
       'style' => $style,
-      'resizable' => $resizable
+      'resizable' => $resizable,
+      'add' => theme('image_annotate_formatter_image_annotate_add')
     ));
     
     // Load all the JS and CSS magic

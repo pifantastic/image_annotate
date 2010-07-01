@@ -42,7 +42,10 @@ var ImageAnnotate = {
     this.options = options;
     this.elem = elem;
     this.$elem = $(elem);
-    this._build();
+    
+    if (!this.$elem.hasClass('image-annotate-processed')) {
+      this._build();
+    }
   },
   
   /**
@@ -100,7 +103,7 @@ var ImageAnnotate = {
     
     // Add 'Add a note' link
     if (self.options.editable) {
-      self.$add = $('<a href="#" class="image-annotate-add">Add Note</a>');
+      self.$add = $(self.options.add).attr("id", "image-annotate-add");
       self.$canvas.before(self.$add);
       self.$add.click(function() {
         self.showForm();
@@ -127,6 +130,8 @@ var ImageAnnotate = {
     }
     
     self.hideNotes();
+    
+    self.$elem.addClass('image-annotate-processed');
   },
   
   /**
@@ -220,24 +225,24 @@ var ImageAnnotate = {
   
   // Show all annotations for this image
   showNotes: function() {
-    this.$canvas.find('.image-annotate-note').show();
+    this.$canvas.find('.image-annotate-note').removeClass('image-annotate-note-hide');
   },
   
   // Hide all annotations for this image
   hideNotes: function() {
-    this.$canvas.find('.image-annotate-note').hide();
+    this.$canvas.find('.image-annotate-note').addClass('image-annotate-note-hide');
   },
   
   // Show the annotation form
   showForm: function() {
-    this.$canvas.find('.image-annotate-annotater').show();
-    this.$canvas.find('.image-annotate-form').show();
+    this.$canvas.find('.image-annotate-annotater').removeClass('image-annotate-annotater-hide');
+    this.$canvas.find('.image-annotate-form').removeClass('image-annotate-form-hide');
   },
   
   // Hide the annotation form
   hideForm: function() {
-    this.$canvas.find('.image-annotate-annotater').hide();
-    this.$canvas.find('.image-annotate-form').hide();
+    this.$canvas.find('.image-annotate-annotater').addClass('image-annotate-annotater-hide');
+    this.$canvas.find('.image-annotate-form').addClass('image-annotate-form-hide');
   }
 };
 

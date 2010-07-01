@@ -1,0 +1,58 @@
+.image-annotate-canvas.pushpin .image-annotate-marker,
+.image-annotate-canvas.pushpin .image-annotate-annotater  {
+  background-image: url(pin_blue.png);
+  background-position: 0 0;
+  border: none;
+  height: 50px;
+  width: 69px;
+  margin: -10px 0 0 -40px;
+  padding: 0;
+  z-index: 999 !important;
+  position: absolute;
+}
+.image-annotate-canvas.pushpin .image-annotate-note-hide,
+.image-annotate-canvas.pushpin .image-annotate-note { 
+  display: block;
+  opacity: 0.4; 
+}
+.image-annotate-canvas.pushpin .image-annotate-note.active {
+  opacity: 1;
+}
+.image-annotate-canvas.pushpin .image-annotate-note.dim div.image-annotate-marker { border: none; }
+.image-annotate-canvas.pushpin .image-annotate-note.dim { 
+  z-index: 997 !important;
+  opacity: 0.5; 
+}
+.image-annotate-canvas.pushpin .image-annotate-note div.text {
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  margin-left: 12px;
+  background-color: #FFFFD3;
+  border: none;
+  color: #000;
+  display: none;
+  position: relative;
+  width: 200px;
+  z-index: 998 !important;
+  padding: 12px;
+}
+.image-annotate-canvas.pushpin .image-annotate-note.active div.text {
+  display: block; 
+}
+.image-annotate-canvas.pushpin .image-annotate-form {
+  display: block;
+  position: absolute;
+  margin: 0;
+  padding: 7px;
+  width: 200px;
+  z-index: 999;
+  background-color: #FFFFD3;
+  color: #000;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+.image-annotate-canvas.pushpin .image-annotate-form textarea { display: block; }
