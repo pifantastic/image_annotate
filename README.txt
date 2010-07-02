@@ -27,6 +27,40 @@ Install
    an "Add a note" link that lets you add comments on the picture (given that you have
    the permission to do so).
 
+Style
+-----
+
+Here is an example of the markup that is generated when annotations are enabled for an image.
+
+<div class="field-item odd">
+  <a href="#" id="image-annotate-add">Add note</a>
+  <div class="image-annotate-canvas pushpin">
+    <div class="image-annotate-annotater ui-draggable"></div>
+    <div class="image-annotate-form">
+      <textarea></textarea>
+      <input type="button" class="image-annotate-save" value="Save">
+      <input type="button" class="image-annotate-cancel" value="Cancel">
+    </div>
+    <div class="image-annotate-note image-annotate-note-hide">
+      <div class="image-annotate-marker"></div>
+      <div class="text">
+        "This is an annotation"
+        <span class="author"> by <a href="/user/1" title="View user profile.">admin</a></span>
+        <div><a href="#" class="image-annotate-delete-note">delete</a></div>
+      </div>
+    </div>
+    <div class="image-annotate-note image-annotate-note-hide">
+      <div class="image-annotate-marker"></div>
+      <div class="text">
+        "This is a second annotation."
+        <span class="author"> by <a href="/user/1" title="View user profile.">admin</a></span>
+        <div><a href="#" class="image-annotate-delete-note">delete</a></div>
+      </div>
+    </div>
+  </div>
+  <img class="imagefield imagefield-field_image image-annotate image-annotate-field_image image-annotate-processed" id="image-annotate-12-field_image-0" width="981" height="354" src="/sites/default/files/image.png">
+</div>
+
 Todo:
 -----
 

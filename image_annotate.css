@@ -40,7 +40,7 @@
   .image-annotate-note-hide { display: none; }
   .image-annotate-marker { border: 1px solid #FFFFFF; }
   .image-annotate-note.dim div.image-annotate-marker { border: 1px solid #222222; }
-  .image-annotate-note div.text {
+  .image-annotate-note div.image-annotate-text {
     margin-top: 10px;
     max-width: 200px;
     background-color: #D0FDAF;
@@ -57,7 +57,7 @@
     position: relative;
     width: 200px;
   }
-  .image-annotate-note.active div.text {
+  .image-annotate-note.active div.image-annotate-text {
     display: block;
     z-index: 999;
   }

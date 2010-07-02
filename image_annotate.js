@@ -174,7 +174,7 @@ var ImageAnnotate = {
     var self = this;
     
     // Create note
-    var $note = $('<div class="image-annotate-note"><div class="image-annotate-marker"></div><div class="text"></div></div>')
+    var $note = $('<div class="image-annotate-note"><div class="image-annotate-marker"></div><div class="image-annotate-text"></div></div>')
       .css({
         top: opts.position_top + 'px',
         left: opts.position_left + 'px'
@@ -190,7 +190,7 @@ var ImageAnnotate = {
     }
     
     // Set the note text
-    var $text = $note.find('.text').html(opts.note || "").hide();
+    var $text = $note.find('.image-annotate-text').html(opts.note || "").hide();
     
     // Add the edit options if the user can edit this note
     if (opts.editable) {

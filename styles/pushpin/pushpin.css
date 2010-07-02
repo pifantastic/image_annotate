@@ -1,6 +1,6 @@
 .image-annotate-canvas.pushpin .image-annotate-marker,
 .image-annotate-canvas.pushpin .image-annotate-annotater  {
-  background-image: url(pin_blue.png);
+  background-image: url(pushpin.png);
   background-position: 0 0;
   border: none;
   height: 50px;
@@ -23,7 +23,7 @@
   z-index: 997 !important;
   opacity: 0.5; 
 }
-.image-annotate-canvas.pushpin .image-annotate-note div.text {
+.image-annotate-canvas.pushpin .image-annotate-note div.image-annotate-text {
   background-repeat: no-repeat;
   margin-top: 10px;
   margin-left: 12px;
@@ -36,7 +36,7 @@
   z-index: 998 !important;
   padding: 12px;
 }
-.image-annotate-canvas.pushpin .image-annotate-note.active div.text {
+.image-annotate-canvas.pushpin .image-annotate-note.active div.image-annotate-text {
   display: block; 
 }
 .image-annotate-canvas.pushpin .image-annotate-form {

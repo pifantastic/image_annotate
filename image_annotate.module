@@ -299,7 +299,7 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
     drupal_add_css(drupal_get_path('module', 'image_annotate') .'/image_annotate.css');
     
     // Load the formatter specific style sheet
-    drupal_add_css(drupal_get_path('module', 'image_annotate') ."/$style.css");
+    drupal_add_css(drupal_get_path('module', 'image_annotate') ."/styles/$style/$style.css");
     
     return theme('imagefield_image', $item, $item['alt'], $item['title'], array('class' => $class, 'id' => $id));
   }
