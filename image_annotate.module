@@ -70,15 +70,18 @@ function image_annotate_edit($nid) {
   }
   else if (user_access('administer image annotations') || (user_access('create image annotations') && $user->uid == $note->uid)) {
     db_query(
-      'UPDATE {image_annotate} 
-        (note, width, height, y, x)
-      VALUES 
-        (\'%s\', %d, %d, %d, %d)
+      'UPDATE {image_annotate} SET
+        note = \'%s\',
+        size_width = %d,
+        size_height = %d,
+        position_top = %d,
+        position_left = %d
       WHERE aid = %d',
-      $_POST['note'], (int) $_POST['width'], (int) $_POST['height'], (int) $_POST['top'], (int) $_POST['left'], $_POST['aid']
+      $_POST['note'], (int) $_POST['size_width'], (int) $_POST['size_height'], (int) $_POST['position_top'], (int) $_POST['position_left'], $_POST['aid']
     );
-    $response['success'] = true;
+    $response['success'] = TRUE;
     $response['id'] = $_POST['aid'];
+    $response['note'] = '"'. check_plain($_POST['note']) . '"<span class="author"> '. t('by') .' '. theme('username', $user) .'</span>';
   }
   
   drupal_json($response);
@@ -108,7 +111,7 @@ function image_annotate_create($node) {
     );
     
     $response['success'] = true;
-    $response['id'] = db_last_insert_id('imgtag', 'id');
+    $response['id'] = db_last_insert_id('image_annotate', 'id');
     $response['note'] = '"'. check_plain($_POST['note']) . '"<span class="author"> '. t('by') .' '. theme('username', $user) .'</span>';
   }
   
@@ -219,7 +222,7 @@ function theme_image_annotate_formatter_image_annotate_pushpin($element) {
  * Theme function for the 'Add note' link
  */
 function theme_image_annotate_formatter_image_annotate_add() {
-  return l(t('Add note'), '#');
+  return '<a href="#">'. t('Add note') .'</a>';
 }
 
 /**
@@ -271,6 +274,7 @@ function theme_image_annotate_formatter_image_annotate($element, $style = 'box',
         'position_top' => $note->position_top,
         'position_left' => $note->position_left,
         'note' => $text,
+        'text' => check_plain($note->note),
         'editable' => $editable,
       );
     }

@@ -1,5 +1,5 @@
 .image-annotate-canvas.pushpin .image-annotate-marker,
-.image-annotate-canvas.pushpin .image-annotate-annotater  {
+.image-annotate-canvas.pushpin .image-annotate-annotater {
   background-image: url(pushpin.png);
   background-position: 0 0;
   border: none;
@@ -20,7 +20,7 @@
 }
 .image-annotate-canvas.pushpin .image-annotate-note.dim div.image-annotate-marker { border: none; }
 .image-annotate-canvas.pushpin .image-annotate-note.dim { 
-  z-index: 997 !important;
+  z-index: 996 !important;
   opacity: 0.5; 
 }
 .image-annotate-canvas.pushpin .image-annotate-note div.image-annotate-text {
@@ -33,7 +33,7 @@
   display: none;
   position: relative;
   width: 200px;
-  z-index: 998 !important;
+  z-index: 997 !important;
   padding: 12px;
 }
 .image-annotate-canvas.pushpin .image-annotate-note.active div.image-annotate-text {
@@ -42,10 +42,10 @@
 .image-annotate-canvas.pushpin .image-annotate-form {
   display: block;
   position: absolute;
-  margin: 0;
+  margin: -40px 0 0 10px;
   padding: 7px;
   width: 200px;
-  z-index: 999;
+  z-index: 998;
   background-color: #FFFFD3;
   color: #000;
   -moz-border-radius: 3px;

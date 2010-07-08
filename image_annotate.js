@@ -75,8 +75,8 @@ var ImageAnnotate = {
       self.hideNotes();
     });
     
-    self.$form = self.$canvas.find('.image-annotate-form').hide();
-    self.$annotater = self.$canvas.find('.image-annotate-annotater').hide();
+    self.$form = self.$canvas.find('.image-annotate-form').addClass('image-annotate-form-hide');
+    self.$annotater = self.$canvas.find('.image-annotate-annotater').addClass('image-annotate-annotater-hide');
     
     // Callback to attach the form to the annotater
     var attachFormToAnnotater = function() {
@@ -137,9 +137,10 @@ var ImageAnnotate = {
   /**
    * Save an annotation
    */
-  saveNote: function(aid) {
-    var self = this;
-    var url = Drupal.settings.basePath + 'image-annotate/create/' + self.options.nid;
+  saveNote: function() {
+    var self = this,
+      url = Drupal.settings.basePath + 'image-annotate/create/' + self.options.nid,
+      note = self.$form.data('note');
     
     var data = {
       field_name: self.options.field,
@@ -151,8 +152,8 @@ var ImageAnnotate = {
       size_height: self.$annotater.height(),
     };
     
-    if (aid) {
-      data.aid = aid;
+    if (note) {
+      data.aid = note.aid;
       url = Drupal.settings.basePath + 'image-annotate/edit/' + self.options.nid;
     }
     
@@ -194,10 +195,15 @@ var ImageAnnotate = {
     
     // Add the edit options if the user can edit this note
     if (opts.editable) {
-      var $actions = $('<div><a href="#" class="image-annotate-delete-note">delete</a></div>');
+      var $actions = $('<div><a href="#" class="image-annotate-delete-note">delete</a>&nbsp;&nbsp;<a href="#" class="image-annotate-edit-note">edit</a></div>');
       $text.append($actions);
       $actions.find('.image-annotate-delete-note').click(function() {
         self.deleteNote(opts.aid, $note);
+        return false;
+      });
+      $actions.find('.image-annotate-edit-note').click(function() {
+        self.showForm(opts);
+        self.hideNotes();
         return false;
       });
     }
@@ -234,9 +240,21 @@ var ImageAnnotate = {
   },
   
   // Show the annotation form
-  showForm: function() {
-    this.$canvas.find('.image-annotate-annotater').removeClass('image-annotate-annotater-hide');
-    this.$canvas.find('.image-annotate-form').removeClass('image-annotate-form-hide');
+  showForm: function(note) {
+    this.$annotater.removeClass('image-annotate-annotater-hide');
+    this.$form.removeClass('image-annotate-form-hide');
+    console.log(note);
+    if (note) {
+      this.$form.data('note', note).find('textarea').text(note.text);
+      this.$annotater.css({
+        top: note.position_top + 'px',
+        left: note.position_left + 'px'
+      });
+      this.$form.css({
+        left: this.$annotater.position().left +'px',
+        top: (parseInt(this.$annotater.position().top) + parseInt(this.$annotater.height()) + 2) +'px'
+      });
+    }
   },
   
   // Hide the annotation form

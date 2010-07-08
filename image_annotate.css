@@ -18,7 +18,7 @@
     width: 60px;
     height: 60px;
   }
-  .image-annotate-annotater-hide { display: none; }
+  .image-annotate-annotater-hide { display: none !important; }
   
   /* Form */
   .image-annotate-form {
@@ -29,15 +29,19 @@
     width: 200px;
     z-index: 999;
   }
-  .image-annotate-form-hide { display: none; }
-  .image-annotate-form textarea { display: block; }
+  .image-annotate-form-hide { display: none !important; }
+  .image-annotate-form textarea { 
+    display: block; 
+    width: 190px;
+    height: 200px;
+  }
   
   /* Note */
   .image-annotate-note {
     position: absolute;
     overflow: visible;
   }
-  .image-annotate-note-hide { display: none; }
+  .image-annotate-note-hide { display: none !important; }
   .image-annotate-marker { border: 1px solid #FFFFFF; }
   .image-annotate-note.dim div.image-annotate-marker { border: 1px solid #222222; }
   .image-annotate-note div.image-annotate-text {
